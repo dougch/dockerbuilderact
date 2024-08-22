@@ -1,0 +1,78 @@
+---
+schemaVersion: 2.0.0
+commandTests:
+  - name: "bssl version"
+    envVars:
+      - key: LD_LIBRARY_PATH
+        value: /usr/local/awslc/lib
+    command: "/usr/local/awslc/bin/bssl"
+    args: ["version"]
+    expectedOutput: ["1.17.4"]
+  - name: "rustc version"
+    command: "/root/.cargo/bin/rustc"
+    args: ["--version"]
+    expectedOutput: ["1.76.0-nightly"]
+fileExistenceTests:
+  - name: 'Openssl 3 shared object'
+    path: '/usr/local/openssl-3.0/lib64/libcrypto.so.3'
+    shouldExist: true
+    permissions: '-rwxr-xr-x'
+  - name: 'Openssl 3 static object'
+    path: '/usr/local/openssl-3.0/lib64/libcrypto.a'
+    shouldExist: true
+    permissions: '-rw-r--r--'
+  - name: 'Openssl 1.1.1 shared object'
+    path: '/usr/local/openssl-1.1.1/lib/libcrypto.so.1.1'
+    shouldExist: true
+    permissions: '-rwxr-xr-x'
+  - name: 'Openssl 1.1.1 static'
+    path: '/usr/local/openssl-1.1.1/lib/libcrypto.a'
+    shouldExist: true
+    permissions: '-rw-r--r--'
+  - name: 'Openssl 1.1.1 libssl shared'
+    path: '/usr/local/openssl-1.1.1/lib/libssl.so.1.1'
+    shouldExist: true
+    permissions: '-rwxr-xr-x'
+  - name: 'Openssl 1.0.2 shared object'
+    path: '/usr/local/openssl-1.0.2/lib/libcrypto.so.1.0.0'
+    shouldExist: true
+    permissions: '-r-xr-xr-x'
+  - name: 'Openssl 1.0.2 static'
+    path: '/usr/local/openssl-1.0.2/lib/libcrypto.a'
+    shouldExist: true
+    permissions: '-rw-r--r--'
+  - name: 'Openssl 1.0.2 FIPS shared object'
+    path: '/usr/local/openssl-1.0.2-fips/lib/libcrypto.so.1.0.0'
+    shouldExist: true
+    permissions: '-r-xr-xr-x'
+  - name: 'Openssl 1.0.2 FIPS static'
+    path: '/usr/local/openssl-1.0.2-fips/lib/libcrypto.a'
+    shouldExist: true
+    permissions: '-rw-r--r--'
+  - name: '32 bit openssl'
+    path: '/usr/lib/i386-linux-gnu/libcrypto.a'
+    shouldExist: true
+    permissions: '-rw-r--r--'
+  - name: 'AWS-LC shared'
+    path: '/usr/local/awslc/lib/libcrypto.so'
+    shouldExist: true
+    permissions: '-rw-r--r--'
+  - name: 'AWS-LC FIPS shared'
+    path: '/usr/local/awslc-fips/lib/libcrypto.so'
+    shouldExist: true
+    permissions: '-rw-r--r--'
+  - name: 'Boringssl shared'
+    path: '/usr/local/boringssl/lib/libcrypto.so'
+    shouldExist: true
+    permissions: '-rwxr-xr-x'
+  - name: 'gnu TLS3.7 shared'
+    path: '/usr/local/gnutls37/lib/libgnutls.so.30.31.0'
+    shouldExist: true
+    permissions: '-rwxr-xr-x'
+  - name: 'libressl shared'
+    path: '/usr/local/libressl/lib/libcrypto.so.50.0.0'
+    shouldExist: true
+    permissions: '-rw-r--r--'
+  - name: 'libFuzzer static'
+    path: '/usr/local/libfuzzer/lib/libFuzzer.a'
+    shouldExist: true

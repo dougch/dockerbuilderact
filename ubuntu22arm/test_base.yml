@@ -1,0 +1,59 @@
+---
+schemaVersion: 2.0.0
+commandTests:
+  - name:  "clang"
+    command: "/usr/bin/clang"
+    args: ["--version"]
+    expectedOutput: ["^Ubuntu clang version 15.*"]
+  - name:  "clang++"
+    command: "/usr/bin/clang++"
+    args: ["--version"]
+    expectedOutput: ["^Ubuntu clang version 15.*"]
+  - name:  "llvm-cov"
+    command: "/usr/bin/llvm-cov"
+    args: ["--version"]
+    expectedOutput: ["^Ubuntu LLVM version 15.*"]
+  - name:  "gcc --version"
+    command: "/usr/bin/gcc"
+    args: ["--version"]
+    expectedOutput: ["^gcc.*?Ubuntu 12.*"]
+  - name:  "Golang1.1x"
+    command: "go"
+    args: ["version"]
+    expectedOutput: ["^go version go1.19.*"]
+  - name:  "python3.10"
+    command: "/usr/bin/python3.10"
+    args: ["--version"]
+    expectedOutput: ["^Python 3\\.10.*"]
+  - name:  "python3.9"
+    command: "/root/.pyenv/shims/python3.9"
+    args: ["--version"]
+  - name:  "python3.9 in the path"
+    command: "which"
+    args: ["python3.9"]
+    expectedOutput: ["python3.9"]
+  - name:  "cmake"
+    command: "/usr/bin/cmake"
+    args: ["--version"]
+    expectedOutput: ["^cmake version 3.*"]
+  - name:  "ninja"
+    command: "/usr/bin/ninja"
+    args: ["--version"]
+    expectedOutput: ["^1.*"]
+  - name:  "java"
+    command: "/usr/bin/java"
+    args: ["--version"]
+    expectedOutput: ["Corretto-17"]
+  - name:  "sudo"
+    command: "/usr/bin/sudo"
+    args: ["-l"]
+    expectedOutput: ["^Matching.*"]
+fileExistenceTests:
+  - name: '/sbin/ifconfig'
+    path: '/sbin/ifconfig'
+    shouldExist: true
+    permissions: '-rwxr-xr-x'
+  - name: 'bssl'
+    path: '/usr/local/awslc/bin/bssl'
+    shouldExist: true
+    permissions: '-rwxr-xr-x'
